@@ -16,6 +16,10 @@ namespace Safecharge.Request
         private string orderId;
         private string isPartialApproval;
 
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?json#payment
+        private string authenticationOnlyType;
+        private string paymentFlow;
+
         /// <summary>
         /// Empty constructor used for mapping from config file.
         /// </summary>
@@ -79,5 +83,26 @@ namespace Safecharge.Request
         }
 
         public CurrencyConversion CurrencyConversion { get; set; }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?json#payment
+        public string AuthenticationOnlyType
+        {
+            get { return this.authenticationOnlyType; }
+            set
+            {
+                Guard.RequiresMaxLength(value?.Length, Constants.MaxLengthStringDefault, nameof(this.AuthenticationOnlyType));
+                this.authenticationOnlyType = value;
+            }
+        }
+
+        public string PaymentFlow
+        {
+            get { return this.paymentFlow; }
+            set
+            {
+                Guard.RequiresMaxLength(value?.Length, Constants.MaxLengthStringDefault, nameof(this.PaymentFlow));
+                this.paymentFlow = value;
+            }
+        }
     }
 }

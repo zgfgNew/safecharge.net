@@ -18,6 +18,9 @@ namespace Safecharge.Request
         private string amount;
         private string customData;
 
+        // Extending Safecharge properties per https://docs.nuvei.com/documentation/features/card-operations/zero-authorization/
+        private string transactionType;
+
         /// <summary>
         /// Empty constructor used for mapping from config file.
         /// </summary>
@@ -118,5 +121,16 @@ namespace Safecharge.Request
         }
 
         public UserAddress BillingAddress { get; set; }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/documentation/features/card-operations/zero-authorization/
+        public string TransactionType
+        {
+            get { return this.transactionType; }
+            set
+            {
+                Guard.RequiresMaxLength(value?.Length, Constants.MaxLengthStringDefault, nameof(this.TransactionType));
+                this.transactionType = value;
+            }
+        }
     }
 }

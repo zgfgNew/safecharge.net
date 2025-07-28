@@ -1,4 +1,5 @@
 ﻿using Safecharge.Model.Common;
+using Safecharge.Model.PaymentOptionModels;
 using Safecharge.Request.Common.Transaction;
 using Safecharge.Utils;
 using Safecharge.Utils.Enum;
@@ -15,6 +16,9 @@ namespace Safecharge.Request
     /// </remarks>
     public class RefundTransactionRequest : SafechargeTransactionRequest
     {
+        // Extending Safecharge properties per https://docs.nuvei.com/documentation/features/financial-operations/refund/
+        private string userTokenId;
+
         /// <summary>
         /// Empty constructor used for mapping from config file.
         /// </summary>
@@ -39,6 +43,20 @@ namespace Safecharge.Request
             : base(merchantInfo, ChecksumOrderMapping.RefundGwTransactionChecksumMapping, sessionToken, currency, amount, relatedTransactionId)
         {
             this.RequestUri = this.CreateRequestUri(ApiConstants.RefundTransactionUrl);
+        }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/documentation/features/financial-operations/refund/
+        public PaymentOption PaymentOption { get; set; }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/documentation/features/financial-operations/refund/
+        public string UserTokenId
+        {
+            get { return this.userTokenId; }
+            set
+            {
+                Guard.RequiresMaxLength(value?.Length, Constants.MaxLengthStringId, nameof(this.UserTokenId));
+                this.userTokenId = value;
+            }
         }
     }
 }

@@ -19,6 +19,10 @@ namespace Safecharge.Request
         private string isRebilling;
         private string preventOverride;
 
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?csharp#openOrder)
+        private string isPartialApproval;
+        private string authenticationOnlyType;
+
         /// <summary>
         /// Empty constructor used for mapping from config file.
         /// </summary>
@@ -84,6 +88,31 @@ namespace Safecharge.Request
                 }
 
                 this.preventOverride = value;
+            }
+        }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?csharp#openOrder)
+        public string AuthenticationOnlyType
+        {
+            get { return this.authenticationOnlyType; }
+            set
+            {
+                Guard.RequiresMaxLength(value?.Length, Constants.MaxLengthStringId, nameof(this.AuthenticationOnlyType));
+                this.authenticationOnlyType = value;
+            }
+        }
+
+        public string IsPartialApproval
+        {
+            get { return this.isPartialApproval; }
+            set
+            {
+                if (value != null)
+                {
+                    Guard.RequiresBool(value, nameof(this.IsPartialApproval));
+                }
+
+                this.isPartialApproval = value;
             }
         }
     }
