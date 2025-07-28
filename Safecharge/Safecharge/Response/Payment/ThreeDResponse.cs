@@ -54,5 +54,21 @@ namespace Safecharge.Response.Payment
         public string DsTransId { get; set; }
 
         public string IsLiabilityOnIssuer { get; set; }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?csharp#threeDOutputClass
+
+        public string ChallengePreferenceReason { get; set; }
+
+        public string ChallengeCancelReason { get; set; }
+
+        public string IsExemptionRequestInAuthentication { get; set; }
+
+        public string Flow { get; set; }
+
+        public string AcquirerDecision { get; set; }
+
+        public string DecisionReason { get; set; }
+
+        public string ThreeDReasonId { get; set; }
     }
 }

@@ -40,5 +40,8 @@ namespace Safecharge.Response.Payment
         public string CustomData { get; set; }
 
         public FraudDetails FraudDetails { get; set; }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?csharp#payment
+        public PartialApproval PartialApproval { get; set; }
     }
 }
