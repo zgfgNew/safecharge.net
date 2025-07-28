@@ -84,7 +84,7 @@ namespace Safecharge
             string customData = null,
             string relatedTransactionId = null,
             string transactionType = null,
-            bool autoPayment3D = default,
+            bool? autoPayment3D = null,
             string isMoto = null,
             SubMethodDetails subMethodDetails = null,
             string isPartialApproval = null,
@@ -306,7 +306,13 @@ namespace Safecharge
             string isMoto = null,
             string isRebilling = null,
             string rebillingType = null,
-            SubMerchant subMerchant = null);
+            SubMerchant subMerchant = null
+
+            // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?csharp#openOrder)
+            ,
+            string preventOverride = null,
+            string isPartialApproval = null
+        );
 
         /// <summary>
         /// This method should be used to create request for initPayment endpoint in Safecharge's REST API.
@@ -404,7 +410,7 @@ namespace Safecharge
             string productId = null,
             string customData = null,
             string transactionType = null,
-            bool autoPayment3D = default,
+            bool? autoPayment3D = null,
             string userId = null,
             string rebillingType = null,
             string authenticationTypeOnly = null,
