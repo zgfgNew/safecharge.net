@@ -17,6 +17,7 @@
         public const string Authorize3dUrl = "api/v1/authorize3d.do";
         public const string Verify3dUrl = "api/v1/verify3d.do";
         public const string PayoutUrl = "api/v1/payout.do";
+
         public const string GetCardDetailsUrl = "api/v1/getCardDetails.do";
         public const string GetMerchantPaymentMethodsUrl = "api/v1/getMerchantPaymentMethods.do";
         public const string GetDcc = "api/v1/getDccDetails";
@@ -37,5 +38,8 @@
         public const string SourceApplication = "NET_SDK";
 
         public const string SdkVersion = "sdk_dotnet_ver";
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?json#getPayoutStatus
+        public const string GetPayoutStatusRequestUrl = "api/v1/getPayoutStatus.do";
     }
 }
