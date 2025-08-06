@@ -10,6 +10,9 @@
         SettleGwTransactionChecksumMapping,
         VoidGwTransactionChecksumMapping,
         RefundGwTransactionChecksumMapping,
-        NoChecksumMapping
+        NoChecksumMapping,
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/advanced/indexAdvanced.html?json#deleteUPO
+        DeleteUPOChecksumMapping
     }
 }
