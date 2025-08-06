@@ -105,11 +105,6 @@ namespace Safecharge
             return await this.Post<PayoutResponse, PayoutRequest>(payoutRequest);
         }
 
-        public async Task<GetPayoutStatusResponse> PayoutStatus(GetPayoutStatusRequest payoutStatusRequest)
-        {
-            return await this.Post<GetPayoutStatusResponse, GetPayoutStatusRequest>(payoutStatusRequest);
-        }
-
         public async Task<GetCardDetailsResponse> GetCardDetails(GetCardDetailsRequest request)
         {
             return await this.Post<GetCardDetailsResponse, GetCardDetailsRequest>(request);
@@ -123,6 +118,18 @@ namespace Safecharge
         public async Task<GetMerchantPaymentMethodsResponse> GetMerchantPaymentMethods(GetMerchantPaymentMethodsRequest request)
         {
             return await this.Post<GetMerchantPaymentMethodsResponse, GetMerchantPaymentMethodsRequest>(request);
+        }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?json#getPayoutStatus
+        public async Task<GetPayoutStatusResponse> PayoutStatus(GetPayoutStatusRequest payoutStatusRequest)
+        {
+            return await this.Post<GetPayoutStatusResponse, GetPayoutStatusRequest>(payoutStatusRequest);
+        }
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/advanced/indexAdvanced.html?json#deleteUPO
+        public async Task<DeleteUPOResponse> DeleteUPO(DeleteUPORequest deleteUPORequest)
+        {
+            return await this.Post<DeleteUPOResponse, DeleteUPORequest>(deleteUPORequest);
         }
 
         public async Task<T1> Post<T1, T2>(SafechargeBaseRequest request)
