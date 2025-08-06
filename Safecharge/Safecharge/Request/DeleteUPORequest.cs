@@ -38,7 +38,7 @@ namespace Safecharge.Request
             string userTokenId,
             string userPaymentOptionId
             )
-            : base(merchantInfo, ChecksumOrderMapping.ApiBasicChecksumMapping)
+            : base(merchantInfo, ChecksumOrderMapping.DeleteUPOChecksumMapping)
         {
             this.ClientRequestId = clientRequestId;
             this.userTokenId = userTokenId;
