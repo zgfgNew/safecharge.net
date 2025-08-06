@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Safecharge.Model.PaymentOptionModels;
 using Safecharge.Utils.Enum;
+using System.Collections.Generic;
 
 namespace Safecharge.Utils
 {
@@ -32,7 +33,16 @@ namespace Safecharge.Utils
                     "MerchantId", "MerchantSiteId", "ClientRequestId", "ClientUniqueId", "Amount", "Currency", "RelatedTransactionId", "AuthCode", "Comment", "UrlDetails", "TimeStamp"
                 }
             },
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/advanced/indexAdvanced.html?json#deleteUPO
             { ChecksumOrderMapping.NoChecksumMapping, new List<string> { } },
+            {
+                ChecksumOrderMapping.DeleteUPOChecksumMapping,
+                new List<string>
+                {
+                    "MerchantId", "MerchantSiteId", "UserTokenId", "ClientRequestId", "UserPaymentOptionId", "TimeStamp"
+                }
+            }
         };
 
         public const int MaxLengthStringId = 45;
