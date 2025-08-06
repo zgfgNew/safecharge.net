@@ -26,7 +26,7 @@ namespace Safecharge.Request
             MerchantInfo merchantInfo)
             : base(merchantInfo, ChecksumOrderMapping.ApiBasicChecksumMapping)
         {
-            this.RequestUri = this.CreateRequestUri(ApiConstants.GetPayoutStatusRequestUrl);
+            this.RequestUri = this.CreateRequestUri(ApiConstants.GetPayoutStatusUrl);
         }
     }
 }
