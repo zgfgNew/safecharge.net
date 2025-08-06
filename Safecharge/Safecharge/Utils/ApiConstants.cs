@@ -40,6 +40,9 @@
         public const string SdkVersion = "sdk_dotnet_ver";
 
         // Extending Safecharge properties per https://docs.nuvei.com/api/main/indexMain_v1_0.html?json#getPayoutStatus
-        public const string GetPayoutStatusRequestUrl = "api/v1/getPayoutStatus.do";
+        public const string GetPayoutStatusUrl = "api/v1/getPayoutStatus.do";
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/advanced/indexAdvanced.html?json#deleteUPO
+        public const string DeleteUPOUrl = "api/v1/deleteUPO.do";
     }
 }
