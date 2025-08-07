@@ -1,7 +1,8 @@
-﻿using Safecharge.Model.Common;
+﻿using EG.SoarPay.Model;
+using Safecharge.Model.Common;
 using Safecharge.Request;
-using Safecharge.Response.Transaction;
 using Safecharge.Response.Common;
+using Safecharge.Response.Transaction;
 using Safecharge.Utils;
 using Safecharge.Utils.Enum;
 
@@ -378,6 +379,52 @@ namespace EG.SoarPay.PSP.Nuvei.SafeCharge_Wrapper
         }
 
         // SafeCharge payins/deposits/payments and payouts/withdrawals
+
+        // Extending Safecharge properties per https://docs.nuvei.com/api/advanced/indexAdvanced.html?json#deleteUPO
+        protected static async Task<string> DeleteUserPaymentOptionId(NuveiSession session)  // Delete UserPaymentOptionId (UPO) on the Nuvei side to force user re-enter card details on the next deposit, in case of saved UPO and Expired card error
+        {
+            do
+            {
+                if (!session.IsInit())
+                {
+                    session.SetError("Not initialized", ResponseStatus_Ext.NotInit);
+                    break;
+                }
+
+                if (!session.IsReadyForPayByOptionId())
+                {
+                    session.SetError("Not ready for PayByOptionId", ResponseStatus_Ext.NotInit);
+                    break;
+                }
+
+                var optionId = session.User.PayByOptionId.UserPaymentOptionId;  // toDo: Uncoment, debugging
+                var clientRequestID = session.GetNewClientRequestID() + "_" + optionId;
+                var req = new DeleteUPORequest(session.Merchant, clientRequestID, session.User.TokenID, optionId);
+                //session.PrintToJsonFile(req, "DeleteUserPaymentOptionIdRequest");  // toDo: Remove, debugging
+
+                var resp = await NuveiCommon.ReqExecutor().DeleteUPO(req);
+                //session.PrintToJsonFile(resp, "DeleteUserPaymentOptionIdResponse");  // toDo: Remove, debugging
+
+                session.ParseRespError(resp);
+            } while (false);
+            return session.GetFullStatus();
+        }
+
+        public static async Task<string> WrapDeleteUserPaymentOptionId(NuveiSession session)
+        {
+            var status = "";
+            try
+            {
+                status = await DeleteUserPaymentOptionId(session);
+                return status;
+            }
+            catch (Exception ex)
+            {
+                //session.PrintToJsonFile(ex.Message, "DeleteUserPaymentOptionIdException");  // toDo: Remove, debugging
+                session.SetError(ex.Message, ResponseStatus_Ext.Exception);
+                return session.GetFullStatus();
+            }
+        }
 
         protected static async Task<ResponseStatus_Ext> SessionTokenReq(NuveiSession session)
         {
